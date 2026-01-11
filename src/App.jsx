@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css'
 import GameCard from './components/GameCard';
+import GameDetails from './components/GameDetails';
 
 function App() {
   const [games, setGames] = useState([]);
@@ -20,16 +22,25 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <h1>My Game Library</h1>
-      {loading ? <p>Loading games…</p> : games.length === 0 ? <p>No games loaded.</p> : (
-        <ul>
-          {games.map(game => (
-            <GameCard key={game.id} game={game} />
-          ))}
-        </ul>
-      )}
-    </div>
+    <Router>
+      <div className="page-filler">
+        <Routes>
+          <Route path="/" element={
+            <>
+              <h1>My Game Library</h1>
+              {loading ? <p>Loading games…</p> : games.length === 0 ? <p>No games loaded.</p> : (
+                <ul>
+                  {games.map(game => (
+                    <GameCard key={game.id} game={game} />
+                  ))}
+                </ul>
+              )}
+            </>
+          } />
+          <Route path="/game/:id" element={<GameDetails />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
