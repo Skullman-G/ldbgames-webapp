@@ -1,0 +1,43 @@
+/* Grid container */
+ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+/* Card styling */
+.game-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+  background: #f9f9f9;
+  transition: transform 0.2s;
+  overflow: hidden;
+  height: 260px;
+  width: 180px;
+}
+
+.game-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Cover image */
+.game-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Placeholder */
+.game-cover-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+  
