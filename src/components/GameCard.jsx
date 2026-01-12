@@ -1,14 +1,12 @@
 import { Link } from 'react-router-dom';
 
 function GameCard({ game }) {
-  const coverUrl = `http://localhost:8000/api/games/${game.id}/img/grid`;
   return (
     <li className="game-card">
       <Link to={`/game/${game.id}`}>
-        {/* Cover image */}
-        {game.img && game.img.grid ? (
+        {game.grid ? (
           <img
-            src={coverUrl}
+            src={`http://localhost:8000/api/games/${game.id}/img/grid`}
             alt={game.name}
             className="game-cover"
           />

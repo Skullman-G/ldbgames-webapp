@@ -22,7 +22,7 @@ function GameDetails() {
   if (loading) return <p>Loading game details...</p>;
   if (!game) return <p>Game not found.</p>;
 
-  const gameTitle = game.img && game.img.logo ? (
+  const gameTitle = game.logo ? (
     <img className="logo-img" src={`http://localhost:8000/api/games/${id}/img/logo`} alt={game.name} />
   ) : (
     <h1>{game.name}</h1>
@@ -30,7 +30,7 @@ function GameDetails() {
 
   return (
     <div className="game-details">
-      {game.img && game.img.hero ? (
+      {game.hero ? (
         <div className="hero-container" style={{ backgroundImage: `url(http://localhost:8000/api/games/${id}/img/hero)` }}>
           {gameTitle}
         </div>
