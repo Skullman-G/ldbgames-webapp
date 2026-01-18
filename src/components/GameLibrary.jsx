@@ -1,12 +1,14 @@
 import GameCard from "./GameCard";
 import { useState, useEffect } from 'react';
+import './GameLibrary.css';
+import { API_BASE_URL } from '../constants';
 
 function GameLibrary() {
   const [games, setGames] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/games")
+    fetch(`${API_BASE_URL}/api/games`)
       .then(res => res.json())
       .then(data => {
         setGames(data);
@@ -20,9 +22,9 @@ function GameLibrary() {
 
   return (
     <div className="game-library">
-      <h1>My Game Library</h1>
+      <h1>Game Library</h1>
       {loading ? <p>Loading games…</p> : games.length === 0 ? <p>No games loaded.</p> : (
-        <ul>
+        <ul className="game-grid">
           {games.map(game => (
             <GameCard key={game.id} game={game} />
           ))}

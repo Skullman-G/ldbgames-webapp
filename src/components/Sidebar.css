@@ -1,0 +1,25 @@
+.sidebar {
+  width: 200px;
+  height: 100%;
+  background: #333;
+  color: white;
+  box-sizing: border-box;
+  box-shadow: -2px 0 5px rgb(22, 22, 22);
+  border-radius: 0 25px 25px 0;
+}
+
+.sidebar h2 {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.sidebar .link-button {
+  border-radius: 0;
+  margin: 0;
+  background-color: #3c3c3c;
+  border: solid 1px #444;
+}
+
+.sidebar .link-button:hover {
+  background-color: #646464;
+}

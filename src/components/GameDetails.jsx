@@ -1,5 +1,7 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../constants';
+import './GameDetails.css';
 
 function GameDetails() {
   const { id } = useParams();
@@ -7,7 +9,7 @@ function GameDetails() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/games/${id}`)
+    fetch(`${API_BASE_URL}/api/games/${id}`)
       .then(res => res.json())
       .then(data => {
         setGame(data);
@@ -22,22 +24,13 @@ function GameDetails() {
   if (loading) return <p>Loading game details...</p>;
   if (!game) return <p>Game not found.</p>;
 
-  const gameTitle = game.logo ? (
-    <img className="logo-img" src={`http://localhost:8000/api/games/${id}/img/logo`} alt={game.name} />
-  ) : (
-    <h1>{game.name}</h1>
-  );
-
   return (
     <div className="game-details">
-      {game.hero ? (
-        <div className="hero-container" style={{ backgroundImage: `url(http://localhost:8000/api/games/${id}/img/hero)` }}>
-          {gameTitle}
-        </div>
-      ) : (
-        <div className="hero-placeholder">{gameTitle}</div>
-      )}
+      <div className="hero-container" style={{ backgroundImage: `url(${API_BASE_URL}${game.hero})` }}>
+        <img className="logo-img" src={`${API_BASE_URL}${game.logo}`} alt={game.name} />
+      </div>
       <p>{game.description || 'No description available.'}</p>
+      <Link to={`edit`} className="link-button">Edit Game</Link>
     </div>
   );
 }

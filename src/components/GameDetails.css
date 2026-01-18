@@ -1,0 +1,30 @@
+.game-details {
+  height: calc(100% - 5rem);
+  margin: 5rem 10rem 0 10rem;
+  text-align: center;
+  background-color: rgb(56, 56, 56);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 25px 25px 0 0;
+  overflow: hidden;
+}
+
+.game-details img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.hero-container {
+  height: 50vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
