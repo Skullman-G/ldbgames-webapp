@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AddGame.css';
 import { API_BASE_URL } from '../constants';
-import ImagePicker from './ImagePicker';
 
 function AddGame() {
   const [gameId, setGameId] = useState('');
@@ -37,9 +36,9 @@ function AddGame() {
   };
 
   return (
-    <div>
+    <div className="add-new-game-div">
       <h1>Add New Game</h1>
-      <form className="add-new-game-div" onSubmit={handleSubmit}>
+      <form className="add-new-game-form" onSubmit={handleSubmit}>
         <label htmlFor="gameId">Game ID:</label>
         <input id="gameId" type="text" placeholder="Game Id" value={gameId} onChange={(e) => setGameId(e.target.value)} />
         <label htmlFor="gameName">Game Name:</label>

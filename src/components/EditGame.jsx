@@ -64,9 +64,9 @@ function EditGame() {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div>
+    <div className="add-new-game-div">
       <h1>Edit Game</h1>
-      <form className="add-new-game-div" onSubmit={handleSubmit}>
+      <form className="add-new-game-form" onSubmit={handleSubmit}>
         <label htmlFor="gameName">Game Name:</label>
         <input id="gameName" type="text" placeholder="Game Name" value={gameName} onChange={(e) => setGameName(e.target.value)} />
         
