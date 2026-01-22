@@ -61,6 +61,24 @@ function EditGame() {
     }
   };
 
+  const deleteGame = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/games/${id}/delete`, {
+        method: 'POST'
+      });
+      if (res.ok) {
+        navigate('/');
+      } else {
+        console.error('Failed to delete game');
+        alert('Error deleting game. Please try again.');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   if (loading) return <p>Loading...</p>;
 
   return (
@@ -86,6 +104,7 @@ function EditGame() {
         <ImagePicker defaultImagePath={game.header} setImageName={setGameHeaderImage} imageType="header" gameId={id} />
         
         <button type="submit">Update Game</button>
+        <button onClick={deleteGame}>Delete Game</button>
       </form>
     </div>
   );
