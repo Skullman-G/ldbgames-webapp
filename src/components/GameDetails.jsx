@@ -8,8 +8,9 @@ function GameDetails() {
   const [game, setGame] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const [selectedVersion, setSelectedVersion] = useState("");
-  const [selectedBuild, setSelectedBuild] = useState(null);
+  const [selectedPlatformId, setSelectedPlatformId] = useState(null);
+  const [selectedVersion, setSelectedVersion] = useState(null);
+  const [availableVersions, setAvailableVersions] = useState([]);
 
   useEffect(() => {
     fetch(`${API_BASE_URL}/api/games/${id}`)
@@ -18,8 +19,13 @@ function GameDetails() {
         setGame(data);
 
         if (data.builds && data.builds.length > 0) {
-          setSelectedVersion(data.builds[0].version);
-          setSelectedBuild(data.builds[0]);
+          setSelectedPlatformId(data.builds[0].platform.id);
+
+          const versions = data.builds
+            .filter(b => b.platform.id === data.builds[0].platform.id)
+            .map(b => b.version);
+          setAvailableVersions(versions);
+          setSelectedVersion(versions[0]);
         }
 
         setLoading(false);
@@ -31,13 +37,22 @@ function GameDetails() {
   }, [id]);
 
   useEffect(() => {
-    if (!game?.builds?.length) return;
-    const b = game.builds.find(x => x.version === selectedVersion);
-    setSelectedBuild(b || null);
-  }, [selectedVersion, game]);
+    if (!game?.builds) return;
+
+    const versions = game.builds
+      .filter(b => b.platform.id === Number(selectedPlatformId))
+      .map(b => b.version);
+
+    setAvailableVersions(versions);
+    setSelectedVersion(versions[0] || null);
+  }, [selectedPlatformId, game]);
 
   if (loading) return <p>Loading game details...</p>;
   if (!game) return <p>Game not found.</p>;
+
+  const selectedBuild = game.builds.find(
+    b => b.platform.id === Number(selectedPlatformId) && b.version === selectedVersion
+  );
 
   return (
     <div className="game-details">
@@ -48,26 +63,23 @@ function GameDetails() {
         <img className="logo-img" src={`${API_BASE_URL}${game.logo}`} alt={game.name} />
       </div>
 
-      <p>{game.description || 'No description available.'}</p>
-
-      <div style={{ display: "flex", gap: "10px", alignItems: "center", marginTop: "20px" }}>
-        <label htmlFor="build-select">Version:</label>
+      <div className="download-container">
+        <select
+          value={selectedPlatformId ?? ""}
+          onChange={e => setSelectedPlatformId(e.target.value)}
+        >
+          {[...new Map(game.builds.map(b => [b.platform.id, b.platform])).values()].map(p => (
+            <option key={p.id} value={p.id}>{p.name}</option>
+          ))}
+        </select>
 
         <select
-          id="build-select"
-          value={selectedVersion}
-          onChange={(e) => setSelectedVersion(e.target.value)}
-          disabled={!game.builds || game.builds.length === 0}
+          value={selectedVersion ?? ""}
+          onChange={e => setSelectedVersion(e.target.value)}
         >
-          {!game.builds || game.builds.length === 0 ? (
-            <option value="">No builds available</option>
-          ) : (
-            game.builds.map((b) => (
-              <option key={b.version} value={b.version}>
-                {b.version}
-              </option>
-            ))
-          )}
+          {availableVersions.map(v => (
+            <option key={v} value={v}>{v}</option>
+          ))}
         </select>
 
         {selectedBuild?.archive_path ? (
@@ -79,11 +91,11 @@ function GameDetails() {
             Download
           </a>
         ) : (
-          <button className="link-button" disabled>
-            Download
-          </button>
+          <button className="link-button" disabled>Download</button>
         )}
       </div>
+
+      <p>{game.description || 'No description available.'}</p>
 
       <Link to={`edit`} className="link-button" style={{ marginTop: "20px", display: "inline-block" }}>
         Edit Game

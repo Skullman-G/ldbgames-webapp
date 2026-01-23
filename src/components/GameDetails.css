@@ -28,3 +28,59 @@
   margin-bottom: 1rem;
   border-radius: 8px;
 }
+
+.download-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  margin: 1rem 0 2rem 0;
+}
+
+.download-container select:first-child {
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  border-radius: 5px 0 0 5px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  appearance: none;
+}
+
+.download-container select:nth-child(2) {
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  border-radius: 0;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  appearance: none;
+  text-align: center;
+}
+
+.download-container select option {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.download-container .link-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.download-container .link-button:hover {
+  background-color: #45a049;
+}

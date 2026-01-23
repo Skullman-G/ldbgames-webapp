@@ -1,50 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../constants";
 
 function AddGameBuild({ gameId }) {
   const [version, setVersion] = useState("");
   const [binaryPath, setBinaryPath] = useState("");
+  const [platforms, setPlatforms] = useState([]);
+  const [platformId, setPlatformId] = useState("");
   const [file, setFile] = useState(null);
-  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/api/platforms`)
+      .then((res) => res.json())
+      .then((data) => {
+        setPlatforms(data);
+        if (data.length > 0) setPlatformId(String(data[0].id));
+      })
+      .catch(console.error);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!version || !file) {
-      alert("Version and file are required");
+    if (!version || !binaryPath || !platformId || !file) {
+      alert("Version, binary path, platform and file are required.");
       return;
     }
 
     const formData = new FormData();
     formData.append("version", version);
     formData.append("binary_path", binaryPath);
+    formData.append("platform", platformId);
     formData.append("file", file);
 
-    setLoading(true);
-
-    const res = await fetch(
-      `${API_BASE_URL}/api/games/${gameId}/build/add`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-
-    setLoading(false);
+    const res = await fetch(`${API_BASE_URL}/api/games/${gameId}/build/add`, {
+      method: "POST",
+      body: formData,
+    });
 
     if (!res.ok) {
-      const err = await res.json();
-      console.error(err);
+      console.error(await res.json());
       alert("Upload failed");
       return;
     }
 
-    const updatedGame = await res.json();
-    console.log("Build added:", updatedGame);
+    alert("Build uploaded successfully!");
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <h3>Add Build</h3>
+
       <label>Version</label>
       <input
         type="text"
@@ -53,24 +58,31 @@ function AddGameBuild({ gameId }) {
         placeholder="1.0.0"
       />
 
-      <label>Binary Path</label>
+      <label>Binary Path (inside archive)</label>
       <input
         type="text"
         value={binaryPath}
         onChange={(e) => setBinaryPath(e.target.value)}
-        placeholder="path/to/binary"
+        placeholder="bin/game.exe or game.x86_64"
       />
 
-      <label>Build archive</label>
+      <label>Platform</label>
+      <select value={platformId} onChange={(e) => setPlatformId(e.target.value)}>
+        {platforms.map((p) => (
+          <option key={p.id} value={p.id}>
+            {p.name}
+          </option>
+        ))}
+      </select>
+
+      <label>Archive File</label>
       <input
         type="file"
         accept=".tar.gz"
         onChange={(e) => setFile(e.target.files?.[0] ?? null)}
       />
 
-      <button disabled={loading}>
-        {loading ? "Uploading..." : "Upload Build"}
-      </button>
+      <button type="submit">Upload Build</button>
     </form>
   );
 }
