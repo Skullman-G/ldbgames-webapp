@@ -2,14 +2,31 @@ import { useRef, useState, useEffect } from 'react';
 import './ImagePicker.css';
 import { API_BASE_URL } from '../constants';
 
-function ImagePicker({ defaultImagePath, setImageName, imageType, gameId }) {
+function ImagePicker({ imagePath, setImagePath, imageType, gameId }) {
   const inputRef = useRef();
   const containerRef = useRef();
   const [showMenu, setShowMenu] = useState(false);
-  const [menuAbove, setMenuAbove] = useState(false); // <-- new state
+  const [menuAbove, setMenuAbove] = useState(false);
   const [serverImages, setServerImages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [imagePath, setImagePath] = useState(defaultImagePath);
+  const [closing, setClosing] = useState(false);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (!showMenu) return;
+
+    const handleClickOutside = (event) => {
+      if (containerRef.current && !containerRef.current.contains(event.target) && !closing) {
+        closeMenu();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showMenu]);
 
   useEffect(() => {
     if (showMenu) {
@@ -18,6 +35,22 @@ function ImagePicker({ defaultImagePath, setImageName, imageType, gameId }) {
     }
   }, [showMenu]);
 
+  const closeMenu = () => {
+    setShowMenu(false);
+    setClosing(true);
+    setTimeout(() => {
+      setVisible(false);
+      setClosing(false);
+    }, 250);
+  };
+
+  const openMenu = () => {
+    setVisible(true);
+    requestAnimationFrame(() => {
+      setShowMenu(true);
+    });
+  };
+
   const adjustMenuPosition = () => {
     const container = containerRef.current;
     if (!container) return;
@@ -25,8 +58,7 @@ function ImagePicker({ defaultImagePath, setImageName, imageType, gameId }) {
     const rect = container.getBoundingClientRect();
     const viewportHeight = window.innerHeight;
 
-    // If the menu would overflow below the viewport, render above
-    setMenuAbove(rect.bottom + 500 > viewportHeight); // 500 = max-height of menu
+    setMenuAbove(rect.bottom + 500 > viewportHeight);
   };
 
   const fetchServerImages = async () => {
@@ -44,10 +76,8 @@ function ImagePicker({ defaultImagePath, setImageName, imageType, gameId }) {
   };
 
   const handleSelectServerImage = (imgPath) => {
-    const filename = imgPath.split('/').pop();
     setImagePath(imgPath);
-    setImageName(filename);
-    setShowMenu(false);
+    closeMenu();
   };
 
   const handleUploadImage = async (e) => {
@@ -78,15 +108,18 @@ function ImagePicker({ defaultImagePath, setImageName, imageType, gameId }) {
 
   return (
     <div className="image-picker-container" ref={containerRef}>
-      <div className="image-upload" onClick={() => setShowMenu(!showMenu)}>
+      <div className="image-upload" onClick={() => {
+        if (showMenu) closeMenu();
+        else openMenu();
+      }}>
         {imagePath ? <img src={`${API_BASE_URL}${imagePath}`} alt="Uploaded" /> : <span className="plus">+</span>}
       </div>
 
-      {showMenu && (
-        <div className={`image-menu ${menuAbove ? 'above' : 'below'}`}>
+      {visible && (
+        <div className={`image-menu ${menuAbove ? 'above' : 'below'} ${showMenu ? 'open' : ''}`}>
           <div className="image-menu-header">
             <h3>Select Image</h3>
-            <button className="close-btn" onClick={() => setShowMenu(false)}>×</button>
+            <div className="close-btn" onClick={closeMenu}>×</div>
           </div>
           <div className="image-menu-content">
             <div className="upload-section">

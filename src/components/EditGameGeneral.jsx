@@ -5,7 +5,6 @@ import './EditGameGeneral.css';
 import ImagePicker from "./ImagePicker";
 
 function EditGameGeneral({ gameId }) {
-  const [game, setGame] = useState({});
   const [gameName, setGameName] = useState('');
   const [gameLogo, setGameLogo] = useState('');
   const [gameHeroImage, setGameHeroImage] = useState('');
@@ -21,8 +20,12 @@ function EditGameGeneral({ gameId }) {
     try {
       const res = await fetch(`${API_BASE_URL}/api/games/${gameId}`);
       const game = await res.json();
-      setGame(game);
       setGameName(game.name);
+      setGameLogo(game.logo);
+      setGameHeroImage(game.hero);
+      setGameIcon(game.icon);
+      setGameGridImage(game.grid);
+      setGameHeaderImage(game.header);
       setLoading(false);
     } catch (err) {
       console.error(err);
@@ -37,22 +40,20 @@ function EditGameGeneral({ gameId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!gameName.trim()) return; // prevent empty names
+    if (!gameName.trim()) return;
 
-    const data = {
-      name: gameName,
-      logo: gameLogo,
-      hero: gameHeroImage,
-      icon: gameIcon,
-      grid: gameGridImage,
-      header: gameHeaderImage,
-    };
+    const formData = new FormData();
+    formData.append('game_name', gameName);
+    formData.append('logo_path', gameLogo);
+    formData.append('hero_path', gameHeroImage);
+    formData.append('icon_path', gameIcon);
+    formData.append('grid_path', gameGridImage);
+    formData.append('header_path', gameHeaderImage);
 
     try {
       const res = await fetch(`${API_BASE_URL}/api/games/${gameId}/update`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: formData,
       });
 
       if (res.ok) navigate('/');
@@ -94,27 +95,27 @@ function EditGameGeneral({ gameId }) {
         <div className="image-picker-grid">
           <div>
             <label className="edit-game-form-label">Logo:</label>
-            <ImagePicker defaultImagePath={game.logo} setImageName={setGameLogo} imageType="logo" gameId={gameId} />
+            <ImagePicker imagePath={gameLogo} setImagePath={setGameLogo} imageType="logo" gameId={gameId} />
           </div>
 
           <div>
             <label className="edit-game-form-label">Hero Image:</label>
-            <ImagePicker defaultImagePath={game.hero} setImageName={setGameHeroImage} imageType="hero" gameId={gameId} />
+            <ImagePicker imagePath={gameHeroImage} setImagePath={setGameHeroImage} imageType="hero" gameId={gameId} />
           </div>
 
           <div>
             <label className="edit-game-form-label">Icon:</label>
-            <ImagePicker defaultImagePath={game.icon} setImageName={setGameIcon} imageType="icon" gameId={gameId} />
+            <ImagePicker imagePath={gameIcon} setImagePath={setGameIcon} imageType="icon" gameId={gameId} />
           </div>
 
           <div>
             <label className="edit-game-form-label">Grid Image:</label>
-            <ImagePicker defaultImagePath={game.grid} setImageName={setGameGridImage} imageType="grid" gameId={gameId} />
+            <ImagePicker imagePath={gameGridImage} setImagePath={setGameGridImage} imageType="grid" gameId={gameId} />
           </div>
 
           <div>
             <label className="edit-game-form-label">Header Image:</label>
-            <ImagePicker defaultImagePath={game.header} setImageName={setGameHeaderImage} imageType="header" gameId={gameId} />
+            <ImagePicker imagePath={gameHeaderImage} setImagePath={setGameHeaderImage} imageType="header" gameId={gameId} />
           </div>
         </div>
 

@@ -187,3 +187,23 @@
   text-align: center;
   margin: 8px 0;
 }
+
+/* --- Menu animations --- */
+.image-menu.above.open {
+  transform: translateY(0);
+}
+
+.image-menu {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.image-menu.above {
+  transform: translateY(-10px);
+}
+
+.image-menu.open {
+  opacity: 1;
+  transform: translateY(0);
+}
