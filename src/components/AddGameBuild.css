@@ -99,3 +99,39 @@
   background: #333;
   margin: 0.5rem 0 1.5rem 0;
 }
+
+.upload-progress {
+  position: relative;
+  height: 18px;
+  background: #111;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #333;
+}
+
+.upload-progress-bar {
+  height: 100%;
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  transition: width 0.2s ease;
+}
+
+.upload-progress span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0b1a12;
+}
+
+.add-build-form button:disabled {
+  background: #333;
+  color: #777;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+  filter: none;
+  opacity: 0.85;
+}

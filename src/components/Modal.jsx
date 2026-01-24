@@ -1,12 +1,14 @@
 import { useState } from "react";
 import "./Modal.css";
 
-function Modal({ isOpen, onClose, children }) {
+function Modal({ isOpen, closable, onClose, children }) {
   const [closing, setClosing] = useState(false);
 
   if (!isOpen) return null;
 
   const handleClose = () => {
+    if (!closable) return;
+    
     setClosing(true);
     setTimeout(() => {
       setClosing(false);

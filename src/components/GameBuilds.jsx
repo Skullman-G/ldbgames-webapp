@@ -9,6 +9,7 @@ function GameBuilds({ gameId }) {
   const [builds, setBuilds] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [popupClosable, setPopupClosable] = useState(true);
 
   const fetchBuilds = async () => {
     setLoading(true);
@@ -26,16 +27,22 @@ function GameBuilds({ gameId }) {
     fetchBuilds();
   }, [gameId]);
 
-  const handleDeleteBuild = async (buildId) => {
+  const handleDeleteBuild = async (version, platformId) => {
     if (!window.confirm("Are you sure you want to delete this build?")) return;
 
     try {
-      const res = await fetch(`${API_BASE_URL}/api/games/${gameId}/build/${buildId}/delete`, {
-        method: "POST"
+      const formData = new FormData();
+      formData.append("version", version);
+      formData.append("platform_id", platformId);
+
+      const res = await fetch(`${API_BASE_URL}/api/games/${gameId}/build/delete`, {
+        method: "POST",
+        body: formData,
       });
 
       if (res.ok) {
-        setBuilds(builds.filter(b => b.id !== buildId));
+        const game = await res.json();
+        setBuilds(game.builds);
       } else {
         alert("Failed to delete build.");
       }
@@ -43,6 +50,11 @@ function GameBuilds({ gameId }) {
       console.error(err);
       alert("Error deleting build.");
     }
+  };
+
+  const onUploadNewBuild = async (builds) => {
+    setShowAddModal(false);
+    setBuilds(builds);
   };
 
   return (
@@ -62,7 +74,7 @@ function GameBuilds({ gameId }) {
             <div key={b.id} class="build-card">
               <button
                 class="delete-build-btn"
-                onClick={() => handleDeleteBuild(b.id)}
+                onClick={() => handleDeleteBuild(b.version, b.platform.id)}
                 title="Delete Build"
               >
                 <img src={trashIcon} alt="Delete" />
@@ -77,8 +89,9 @@ function GameBuilds({ gameId }) {
       <Modal
         isOpen={showAddModal}
         onClose={() => setShowAddModal(false)}
+        closable={popupClosable}
       >
-        <AddGameBuild gameId={gameId} />
+        <AddGameBuild gameId={gameId} setClosable={setPopupClosable} onFinish={onUploadNewBuild} />
       </Modal>
     </div>
   );
