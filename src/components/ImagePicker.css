@@ -162,10 +162,11 @@
   width: 80px;
   height: 80px;
   border-radius: 6px;
-  overflow: hidden;
   cursor: pointer;
   border: 2px solid #333;
   transition: all 0.2s;
+  cursor: pointer;
+  overflow: visible;
 }
 
 .image-thumbnail:hover {
@@ -206,4 +207,31 @@
 .image-menu.open {
   opacity: 1;
   transform: translateY(0);
+}
+
+.delete-thumbnail-btn {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: rgba(231, 76, 60, 0.9);
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  z-index: 10;
+}
+
+.delete-thumbnail-btn:hover {
+  background: rgba(192, 57, 43, 1);
+  transform: scale(1.3);
 }

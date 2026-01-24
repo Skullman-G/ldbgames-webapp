@@ -61,6 +61,29 @@ function ImagePicker({ imagePath, setImagePath, imageType, gameId }) {
     setMenuAbove(rect.bottom + 500 > viewportHeight);
   };
 
+  const handleDeleteImage = async (imgPath) => {
+    if (!window.confirm("Are you sure you want to delete this image?")) return;
+
+    try {
+      const formData = new FormData();
+      formData.append('image_path', imgPath);
+
+      const response = await fetch(`${API_BASE_URL}/api/games/${gameId}/img/delete`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        await fetchServerImages();
+      } else {
+        alert("Failed to delete image.");
+      }
+    } catch (err) {
+      console.error("Error deleting image:", err);
+      alert("Error deleting image.");
+    }
+  };
+
   const fetchServerImages = async () => {
     setLoading(true);
     try {
@@ -134,8 +157,17 @@ function ImagePicker({ imagePath, setImagePath, imageType, gameId }) {
               ) : serverImages.length > 0 ? (
                 <div className="image-grid">
                   {serverImages.map((image, idx) => (
-                    <div key={idx} className="image-thumbnail" onClick={() => handleSelectServerImage(image)}>
-                      <img src={`${API_BASE_URL}${image}`} alt={image} />
+                    <div key={idx} className="image-thumbnail">
+                      <img src={`${API_BASE_URL}${image}`} alt={image} onClick={() => handleSelectServerImage(image)} />
+                      <div
+                        className="delete-thumbnail-btn"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteImage(image);
+                        }}
+                      >
+                        ×
+                      </div>
                     </div>
                   ))}
                 </div>
