@@ -1,87 +1,111 @@
+/* --- Pill container --- */
 .download-pill {
   display: flex;
-  justify-content: center;
   align-items: center;
-  background-color: #4caf50;
-  font-size: 1rem;
-  height: 2.5rem;
-  gap: 0;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  width: 20rem;
+  background: #1e1e1e;
+  border-radius: 999px;
+  border: 1px solid #2a2a2a;
+  height: 3rem;
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.4),
+    inset 0 0 0 1px rgba(255,255,255,0.03);
 }
 
+/* --- Dropdowns --- */
 .dropdown {
   position: relative;
   height: 100%;
-  flex: 0 0 auto;
 }
 
 .dropdown-btn {
-  background-color: #4caf50;
-  color: white;
+  background: transparent;
+  color: #e0e0e0;
   border: none;
-  padding: 0 1.5rem;
-  cursor: pointer;
+  padding: 0 1.25rem;
   height: 100%;
-  text-decoration: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  width: 6.5rem;
   justify-content: center;
-  border-radius: 0;
+  min-width: 7rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .dropdown-btn:hover {
-  background-color: #45a049;
-  color: white;
+  background: rgba(46, 204, 113, 0.12);
+  color: #2ecc71;
 }
 
+/* Divider between dropdowns */
+.dropdown:not(:last-of-type) {
+  border-right: 1px solid #2a2a2a;
+}
+
+/* --- Dropdown menu --- */
 .dropdown-menu {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 6px);
   left: 0;
-  min-width: 100%;
-  background-color: #3a843d;
-  z-index: 10;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 12px;
   overflow: hidden;
+  z-index: 20;
+  min-width: 100%;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.6);
 }
 
 .dropdown-item {
-  padding: 0.5rem 1rem;
+  padding: 0.65rem 1rem;
   cursor: pointer;
-  color: white;
-  white-space: nowrap;
+  color: #ddd;
+  font-weight: 500;
+  transition: background 0.15s ease;
 }
 
 .dropdown-item:hover {
-  background-color: #45a049;
+  background: #2ecc71;
+  color: #111;
+}
+
+/* --- Download button --- */
+.download-btn {
+  height: 100%;
+  padding: 0 1.75rem;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #2ecc71;
+  color: #0b1a12;
+  transition: all 0.2s ease;
+}
+
+.download-btn.primary:hover {
+  background: #27ae60;
+  box-shadow:
+    0 0 0 4px rgba(46,204,113,0.15),
+    0 6px 20px rgba(46,204,113,0.4);
+  color: #0b1a12;
+}
+
+.download-btn:disabled {
+  background: #333;
+  color: #777;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Rounded ends */
+.dropdown:first-child .dropdown-btn {
+  border-top-left-radius: 999px;
+  border-bottom-left-radius: 999px;
 }
 
 .download-btn {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  padding: 0 1.5rem;
-  cursor: pointer;
-  height: 100%;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  width: 6.5rem;
-  justify-content: center;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-
-.download-btn:hover {
-  background-color: #45a049;
-  color: white;
-}
-
-.dropdown:first-child .dropdown-btn {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
 }

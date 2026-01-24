@@ -1,25 +1,66 @@
 .sidebar {
-  width: 200px;
-  height: 100%;
-  background: #333;
-  color: white;
-  box-sizing: border-box;
-  box-shadow: -2px 0 5px rgb(22, 22, 22);
-  border-radius: 0 25px 25px 0;
+  width: 220px;
+  height: 100vh;
+  background: linear-gradient(180deg, #1b1b1b, #141414);
+  color: #fff;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+  border-right: 1px solid #2a2a2a;
 }
 
-.sidebar h2 {
+/* Title */
+.sidebar-title {
+  margin: 0 0 1.5rem 0;
   text-align: center;
-  padding: 1rem 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2ecc71;
 }
 
-.sidebar .link-button {
-  border-radius: 0;
-  margin: 0;
-  background-color: #3c3c3c;
-  border: solid 1px #444;
+/* Nav */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.sidebar .link-button:hover {
-  background-color: #646464;
+/* Links */
+.sidebar-link {
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  color: #ccc;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+/* Hover */
+.sidebar-link:hover {
+  background: #222;
+  color: #fff;
+  border-color: #2ecc71;
+}
+
+/* Active route */
+.sidebar-link.active {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: #0b1a12;
+  box-shadow: 0 6px 18px rgba(46,204,113,0.35);
+}
+
+/* Subtle press */
+.sidebar-link:active {
+  transform: scale(0.98);
+}
+
+.form-separator {
+  border: none;
+  height: 1px;
+  background: #333;
+  margin: 0.5rem 0 1.5rem 0;
 }

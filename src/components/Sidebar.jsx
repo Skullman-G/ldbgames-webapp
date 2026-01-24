@@ -1,13 +1,23 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Sidebar.css';
 
 function Sidebar() {
   return (
-    <div className="sidebar">
-      <h2>Menu</h2>
-      <Link to="/" className="link-button">Library</Link>
-      <Link to="/add-game" className="link-button">Add Game</Link>
-    </div>
+    <aside className="sidebar">
+      <h2 className="sidebar-title">LDB-Games</h2>
+
+      <hr className="form-separator" />
+
+      <nav className="sidebar-nav">
+        <NavLink to="/" end className="sidebar-link">
+          Library
+        </NavLink>
+
+        <NavLink to="/add-game" className="sidebar-link">
+          Add Game
+        </NavLink>
+      </nav>
+    </aside>
   );
 }
 

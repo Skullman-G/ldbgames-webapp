@@ -1,0 +1,101 @@
+/* --- Build Form Container --- */
+.add-build-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: #1e1e1e;
+  padding: 2rem;
+  width: 100%;
+}
+
+/* --- Form Heading --- */
+.add-build-form h2 {
+  color: #2ecc71;
+  text-align: center;
+}
+
+/* --- Labels --- */
+.add-build-form label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #a0a0a0;
+  margin-bottom: 0.3rem;
+}
+
+/* --- Inputs & Select --- */
+.add-build-form input[type="text"],
+.add-build-form select,
+.add-build-form input[type="file"] {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: #151515;
+  color: #f5f5f5;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.add-build-form input::placeholder {
+  color: #666;
+}
+
+.add-build-form input:focus,
+.add-build-form select:focus {
+  outline: none;
+  border-color: #2ecc71;
+  background: #111;
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.25);
+}
+
+/* --- Buttons --- */
+.add-build-form button {
+  margin-top: 1rem;
+  padding: 0.85rem;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: #0b1a12;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-build-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(46, 204, 113, 0.35);
+  filter: brightness(1.05);
+}
+
+.add-build-form button:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 12px rgba(46, 204, 113, 0.25);
+}
+
+/* --- File input styling --- */
+.add-build-form input[type="file"] {
+  cursor: pointer;
+  color: #f5f5f5;
+}
+
+.add-build-form input[type="file"]::file-selector-button {
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: #2ecc71;
+  color: #111;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.add-build-form input[type="file"]::file-selector-button:hover {
+  background: #27ae60;
+}
+
+.form-separator {
+  border: none;
+  height: 1px;
+  background: #333;
+  margin: 0.5rem 0 1.5rem 0;
+}

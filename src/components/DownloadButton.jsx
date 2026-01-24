@@ -8,9 +8,11 @@ function DownloadButton({ builds }) {
     ...new Map(builds.map(b => [b.platform.id, b.platform])).values()
   ];
 
+  const availableBuild = builds.find(b => b.platform.id === platforms[0].id);
+
   const [selectedPlatform, setSelectedPlatform] = useState(platforms[0]);
   const [selectedVersion, setSelectedVersion] = useState(
-    builds.find(b => b.platform.id === platforms[0].id).version
+    availableBuild ? availableBuild.version : null
   );
 
   const platformBuilds = builds.filter(
@@ -24,7 +26,7 @@ function DownloadButton({ builds }) {
   return (
     <div className="download-pill">
       <Dropdown
-        label={selectedPlatform.name}
+        label={selectedPlatform ? selectedPlatform.name : null}
         items={platforms}
         getKey={p => p.id}
         renderItem={p => p.name}
@@ -46,7 +48,7 @@ function DownloadButton({ builds }) {
 
       {selectedBuild ? (
         <a
-          className="download-btn"
+          className="download-btn primary"
           href={`${API_BASE_URL}${selectedBuild.archive_path}`}
           download
         >

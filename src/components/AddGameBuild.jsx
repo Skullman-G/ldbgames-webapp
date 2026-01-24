@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../constants";
+import "./AddGameBuild.css";
 
 function AddGameBuild({ gameId }) {
   const [version, setVersion] = useState("");
@@ -47,8 +48,10 @@ function AddGameBuild({ gameId }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Add Build</h3>
+    <form className="add-build-form" onSubmit={handleSubmit}>
+      <h2>Add Build</h2>
+
+      <hr className="form-separator" />
 
       <label>Version</label>
       <input

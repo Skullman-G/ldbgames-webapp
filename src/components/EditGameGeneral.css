@@ -1,0 +1,143 @@
+/* --- Form --- */
+.edit-game-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.edit-game-form-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #a0a0a0;
+  margin-bottom: 0.3rem;
+}
+
+.edit-game-form input {
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: #151515;
+  color: #f5f5f5;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.edit-game-form input::placeholder {
+  color: #666;
+}
+
+.edit-game-form input:focus {
+  outline: none;
+  border-color: #2ecc71;
+  background: #111;
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.25);
+}
+
+/* --- Buttons --- */
+.form-buttons button {
+  margin-top: 0.5rem;
+  padding: 0.85rem;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: #0b1a12;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.form-buttons button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(46, 204, 113, 0.35);
+  filter: brightness(1.05);
+}
+
+.form-buttons button:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 12px rgba(46, 204, 113, 0.25);
+}
+
+/* --- Disabled buttons --- */
+.form-buttons button:disabled {
+  background: #2a2a2a;
+  color: #777;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* --- Error message --- */
+.form-error {
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  text-align: center;
+  margin-top: -0.25rem;
+}
+
+/* --- Image picker spacing --- */
+.edit-game-form > label + .image-picker {
+  margin-bottom: 0.75rem;
+}
+
+.form-buttons button.delete {
+  background: #e74c3c;
+  color: #fff;
+}
+.form-buttons button.delete:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 12px 24px rgba(204, 49, 46, 0.35);
+}
+
+/* --- Form buttons --- */
+.form-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.form-buttons button.delete {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.form-buttons button.delete:hover {
+  filter: brightness(1.1);
+}
+
+/* --- Image Picker Grid --- */
+.image-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* Each label + image picker container */
+.image-picker-grid > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit-game-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: #1e1e1e;
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid #2a2a2a;
+}
+
+.edit-game-container h2 {
+  color: #2ecc71;
+  margin: 0;
+}
+
+.form-separator {
+  border: none;
+  height: 1px;
+  background: #333;
+  margin: 0.5rem 0 1.5rem 0;
+}

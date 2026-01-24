@@ -1,18 +1,23 @@
-import { Link } from 'react-router-dom';
-import './GameCard.css';
-import { API_BASE_URL } from '../constants';
+import { Link } from "react-router-dom";
+import "./GameCard.css";
+import { API_BASE_URL } from "../constants";
 
 function GameCard({ game }) {
   return (
     <li className="game-card">
-      <Link to={`/game/${game.id}`}>
+      <Link to={`/game/${game.id}`} className="game-card-link">
         <div className="image-container">
-          <img
-            src={`${API_BASE_URL}${game.grid}`}
-            alt=' '
-            className="game-cover"
-          />
-          {!game.grid && <div className="overlay-text">{game.name}</div>}
+          {game.grid ? (
+            <img
+              src={`${API_BASE_URL}${game.grid}`}
+              alt={game.name}
+              className="game-cover"
+            />
+          ) : (
+            <div className="game-cover-placeholder">
+              {game.name}
+            </div>
+          )}
         </div>
       </Link>
     </li>
