@@ -22,18 +22,14 @@ function AddGame() {
 
     setError('');
 
-    const data = {
-      id: gameId.trim(),
-      name: gameName.trim(),
-    };
+    const formData = new FormData();
+    formData.append('game_id', gameId.trim());
+    formData.append('game_name', gameName.trim());
 
     try {
       const res = await fetch(`${API_BASE_URL}/api/games/add`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+        body: formData,
       });
 
       if (res.ok) {

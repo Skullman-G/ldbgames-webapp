@@ -11,6 +11,7 @@ function EditGameGeneral({ gameId }) {
   const [gameIcon, setGameIcon] = useState('');
   const [gameGridImage, setGameGridImage] = useState('');
   const [gameHeaderImage, setGameHeaderImage] = useState('');
+  const [gameDescription, setGameDescription] = useState('');
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ function EditGameGeneral({ gameId }) {
       setGameIcon(game.icon);
       setGameGridImage(game.grid);
       setGameHeaderImage(game.header);
+      setGameDescription(game.description);
       setLoading(false);
     } catch (err) {
       console.error(err);
@@ -49,6 +51,7 @@ function EditGameGeneral({ gameId }) {
     formData.append('icon_path', gameIcon);
     formData.append('grid_path', gameGridImage);
     formData.append('header_path', gameHeaderImage);
+    formData.append('game_description', gameDescription);
 
     try {
       const res = await fetch(`${API_BASE_URL}/api/games/${gameId}/update`, {
@@ -87,9 +90,18 @@ function EditGameGeneral({ gameId }) {
         <input
           id="gameName"
           type="text"
-          placeholder="Game Name"
+          placeholder="Elden Ring"
           value={gameName}
           onChange={(e) => setGameName(e.target.value)}
+        />
+
+        <label class="edit-game-form-label" htmlFor="gameDescription">Game Description:</label>
+        <textarea
+          id="gameDescription"
+          type="text"
+          placeholder="The best game ever..."
+          value={gameDescription}
+          onChange={(e) => setGameDescription(e.target.value)}
         />
 
         <div className="image-picker-grid">
