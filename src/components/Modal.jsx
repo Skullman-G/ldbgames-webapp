@@ -19,7 +19,6 @@ function Modal({ isOpen, closable, onClose, children }) {
   return (
     <div
       className={`modal-overlay ${closing ? "closing" : ""}`}
-      onClick={handleClose}
     >
       <div
         className={`modal-content ${closing ? "closing" : ""}`}

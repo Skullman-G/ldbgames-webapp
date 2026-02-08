@@ -1,0 +1,138 @@
+.platforms-container {
+  display: flex;
+  flex-direction: column;
+  background: #1e1e1e;
+  padding: 1.5rem;
+  width: 75%;
+  margin: 2rem auto;
+  border-radius: 20px;
+  border: 1px solid #2a2a2a;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+  gap: 2rem;
+}
+
+.platforms-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.platforms-header h2 {
+  color: #2ecc71;
+  margin: 0;
+}
+
+.add-platform-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #2ecc71;
+  color: #111;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.add-platform-btn:hover {
+  background: #27ae60;
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+  transform: scale(1.1);
+}
+
+.platforms-status {
+  text-align: center;
+  color: #888;
+}
+
+/* Grid */
+.platforms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.platform-card {
+  position: relative;
+  background: #222;
+  border-radius: 12px;
+  padding: 1rem;
+  color: #fff;
+  border: 1px solid #333;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.platform-name {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.button-section {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  gap: 0.5rem;
+}
+
+.edit-platform-btn {
+  background: #7f7f7f;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.edit-platform-btn:hover {
+  background: #d5d5d5;
+  box-shadow: 0 4px 12px rgba(189, 189, 189, 0.4);
+}
+
+.edit-platform-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Delete button */
+.delete-platform-btn {
+  background: #e74c3c;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.delete-platform-btn:hover {
+  background: #c0392b;
+  box-shadow: 0 4px 12px rgba(231,76,60,0.4);
+}
+
+.delete-platform-btn img {
+  width: 40px;
+  height: 40px;
+}
+
+.delete-platform-btn:disabled {
+  background: #333;
+  color: #777;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+  filter: none;
+  opacity: 0.85;
+}

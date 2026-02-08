@@ -59,7 +59,7 @@ function EditGameGeneral({ gameId }) {
         body: formData,
       });
 
-      if (res.ok) navigate('/');
+      if (res.ok) navigate(`/game/${gameId}`);
       else alert('Error updating game. Please try again.');
     } catch (err) {
       console.error(err);

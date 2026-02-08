@@ -5,6 +5,7 @@ import GameLibrary from './components/GameLibrary';
 import AddGame from './components/AddGame';
 import EditGame from './components/EditGame';
 import Sidebar from './components/Sidebar';
+import Platforms from './components/Platforms';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/game/:id" element={<GameDetails />} />
             <Route path="/add-game" element={<AddGame />} />
             <Route path="/game/:id/edit" element={<EditGame />} />
+            <Route path="/platforms" element={<Platforms />} />
           </Routes>
         </div>
       </div>

@@ -1,28 +1,19 @@
-/* Global styles or other components */
-
 .app {
   display: flex;
   background-color: #121212;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  height: 100vh;
+  flex-shrink: 0;
 }
 
 .main-content {
-  width: 100%;
-}
-
-.hero-placeholder {
-  height: 400px;
-  width: 800px;
-  background: #ddd;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-}
-
-.logo-img {
-  max-width: 200px;
-  max-height: 200px;
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }

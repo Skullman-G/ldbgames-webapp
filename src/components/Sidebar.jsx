@@ -16,6 +16,10 @@ function Sidebar() {
         <NavLink to="/add-game" className="sidebar-link">
           Add Game
         </NavLink>
+
+        <NavLink to="/platforms" className="sidebar-link">
+          Platforms
+        </NavLink>
       </nav>
     </aside>
   );
